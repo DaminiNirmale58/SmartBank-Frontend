@@ -17,6 +17,7 @@ import Customers from "./pages/admin/Customers";
 import AdminAccounts from "./pages/admin/AdminAccounts";
 import Approvals from "./pages/admin/Approvals";
 import AdminTransactions from "./pages/admin/AdminTransactions";
+import MyAccounts from "./pages/MyAccounts";
 
 // Protected Route
 function ProtectedRoute({ children, allowedRole }) {
@@ -60,6 +61,15 @@ function App() {
           element={
             <ProtectedRoute allowedRole="CUSTOMER">
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/accounts"
+          element={
+            <ProtectedRoute allowedRole="CUSTOMER">
+              <MyAccounts />
             </ProtectedRoute>
           }
         />

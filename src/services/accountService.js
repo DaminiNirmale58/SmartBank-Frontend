@@ -25,3 +25,30 @@ export const getMyAccounts = async () => {
 
   return data;
 };
+
+export const createAccount = async (accountType) => {
+  const token = sessionStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Session expired. Please login again.");
+  }
+
+  const response = await fetch(`${API_URL}/create`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      accountType: accountType,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || data.error || "Unable to create account.");
+  }
+
+  return data;
+};
